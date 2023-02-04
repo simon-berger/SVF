@@ -20,7 +20,16 @@ do
     # Compile to binary
     clang -O0 $TEST_FILE -o $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c)
 
-    # Create svfg from LLVM IR
-    wpa -ander -svfg -dump-vfg -write-ander $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).ander -write-svfg $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).svfg $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).ll
-    mv svfg_final.dot $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).dot
+    # Create graphs and data from LLVM IR using SVF
+    wpa -nander -svfg -dump-vfg -dump-callgraph -dump-pag -write-ander $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).ander -write-svfg $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).svfg $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).ll
+    mv svfg_final.dot $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c)_svfg.dot
+    mv callgraph_final.dot $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c)_callgraph.dot
+    mv svfir_initial.dot $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c)_svfir.dot
+    rm callgraph_initial.dot
+    wpa -type -dump-icfg $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).ll
+    mv icfg_initial.dot $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c)_icfg.dot
+    mv vfg_initial.dot $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c)_vfg.dot
+    
+    saber -nander -dump-free -dump-vfg $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c).ll
+    mv svfg_final.dot $SCRIPT_DIR/simple_tests_results/$(basename "$TEST_FILE" .c)_saber_svfg.dot
 done
