@@ -21,3 +21,4 @@ doxygen/
 *.obj
 *.svf
 cmake-build-debug/
+tests/simple_tests_results/
