@@ -5,7 +5,7 @@ int* f(){
     return arr;
 }
 
-int main(int argc, char **argv) {
+int main() {
     int* arr = f();
     arr[0] = 42;
 }

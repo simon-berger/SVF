@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-int main(int argc, char **argv) {
+int main() {
     char* buf = malloc(512);
     free(buf);
     free(buf);
