@@ -28,7 +28,7 @@ do
     clang -O0 ${TEST_FILE} -o ${TEST_DIR}/${TEST_NAME}.bin
 
     # Create graphs and data from LLVM IR using SVF
-    wpa -nander -svfg -show-hidden-nodes -svfg-with-ind-call -rp-td-edge -dump-vfg -dump-callgraph -dump-pag -write-ander ${TEST_DIR}/${TEST_NAME}_wpa.ander -write-svfg ${TEST_DIR}/${TEST_NAME}_wpa.svfg ${TEST_DIR}/${TEST_NAME}.ll
+    wpa -nander -svfg -dump-vfg -dump-callgraph -dump-pag -write-ander ${TEST_DIR}/${TEST_NAME}_wpa.ander -write-svfg ${TEST_DIR}/${TEST_NAME}_wpa.svfg ${TEST_DIR}/${TEST_NAME}.ll
     mv svfg_final.dot ${TEST_DIR}/${TEST_NAME}_wpa_svfg.dot
     mv callgraph_final.dot ${TEST_DIR}/${TEST_NAME}_wpa_callgraph.dot
     mv svfir_initial.dot ${TEST_DIR}/${TEST_NAME}_wpa_svfir.dot
