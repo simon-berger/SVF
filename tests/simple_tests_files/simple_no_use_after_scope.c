@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 char* f(){
-    char buf = malloc(8);
+    char* buf = malloc(8);
     return buf;
 }
 
