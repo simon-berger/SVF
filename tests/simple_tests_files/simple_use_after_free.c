@@ -3,5 +3,5 @@
 int main() {
     char* buf = malloc(512);
     free(buf);
-    buf = "Hello World!";
+    sprintf(buf, "%s", "Hello World!"); // use-after-free
 }  
